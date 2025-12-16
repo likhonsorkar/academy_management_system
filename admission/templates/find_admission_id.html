@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% block content %}
+<section class="max-w-3xl mx-auto my-10 p-6 bg-white rounded shadow">
+    <h2 class="text-2xl font-bold mb-6">ভর্তি আইডি খুঁজুন</h2>
+    <form method="POST" class="space-y-4">
+        {% csrf_token %}
+        <div>
+            <label class="block mb-1">জন্ম তারিখ</label>
+            <input type="date" name="birth_date" class="w-full border p-2 rounded" required>
+        </div>
+        <div>
+            <label class="block mb-1">জন্ম নিবন্ধন নম্বর</label>
+            <input type="text" name="birth_certificate_no" class="w-full border p-2 rounded" required>
+        </div>
+        <button type="submit" class="bg-green-800 text-white px-6 py-2 rounded hover:bg-green-700">Find</button>
+    </form>
+
+    {% if admission %}
+        <p class="mt-4 text-lg">আপনার ভর্তি আইডি: <strong>{{ admission.admission_id }}</strong></p>
+    {% elif admission is not none %}
+        <p class="mt-4 text-red-600">কোনও ভর্তি আইডি পাওয়া যায়নি।</p>
+    {% endif %}
+</section>
+{% endblock %}
